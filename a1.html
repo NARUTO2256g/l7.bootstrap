@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Carousel Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .arrow.left {
+            left: 5px;
+        }
+
+        .arrow.right {
+            right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Carousel Example</h1>
+
+    <div class="carousel" id="carousel">
+        <div class="slides">
+            <!-- Slide 1: Parrot -->
+            <div class="slide">
+                <img src="OIP.webp" alt="Parrot" />
+                <div class="caption">Parrot</div>
+            </div>
+
+            <!-- Add more slides as needed -->
+            <div class="slide">
+                <img src="download (1).webp" alt="Cat" />
+                <div class="caption">Cat</div>
+            </div>
+
+            <div class="slide">
+                <img src="download.webp" alt="Dog" />
+                <div class="caption">Dog</div>
+            </div>
+        </div>
+
+        <button class="arrow left" id="prev">&#10094;</button>
+        <button class="arrow right" id="next">&#10095;</button>
+    </div>
+
+    <script>
+        const slidesContainer = document.querySelector(".slides");
+        const slides = document.querySelectorAll(".slide");
+        const prevBtn = document.getElementById("prev");
+        const nextBtn = document.getElementById("next");
+
+        let currentIndex = 0;
+
+        function updateSlide() {
+            const offset = -currentIndex * 100;
+            slidesContainer.style.transform = `translateX(${offset}%)`;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlide();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlide();
+        });
+    </script>
+</body>
+
+</html>
